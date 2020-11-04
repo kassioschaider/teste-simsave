@@ -10,7 +10,7 @@ class Employee extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'role', 'email', 'phone_number', 'admission_date',
+        'name', 'role', 'email', 'phone_number', 'admission_date', 'company_id',
     ];
 
     public function companie()
