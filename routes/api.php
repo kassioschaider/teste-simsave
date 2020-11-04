@@ -15,21 +15,21 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'company'], function ($router) {
 
-	$router->get('','CompanyController@listCompanies');
-	$router->post('','CompanyController@createCompany');
-	$router->get('{id}','CompanyController@getCompany');
-    $router->put('{id}','CompanyController@editCompany');
-	$router->delete('{id}','CompanyController@deleteCompany');
+	$router->get('','CompanyController@list');
+	$router->post('','CompanyController@create');
+	$router->get('{id}','CompanyController@get');
+    $router->put('{id}','CompanyController@edit');
+	$router->delete('{id}','CompanyController@delete');
 
 });
 
 Route::group(['prefix' => 'employee'], function ($router) {
 
-    $router->get('','EmployeeController@listEmployee');
-    $router->post('','EmployeeController@createEmployee');
-    $router->get('{id}','EmployeeController@getEmployee');
-    $router->put('{id}','EmployeeController@editEmployee');
-    $router->delete('{id}','EmployeeController@deleteEmployee');
+    $router->get('','EmployeeController@list');
+    $router->post('','EmployeeController@create');
+    $router->get('{id}','EmployeeController@get');
+    $router->put('{id}','EmployeeController@edit');
+    $router->delete('{id}','EmployeeController@delete');
 
 });
 
