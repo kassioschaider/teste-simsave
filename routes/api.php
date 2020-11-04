@@ -13,13 +13,23 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'company/'], function ($router) {
+Route::group(['prefix' => 'company'], function ($router) {
 
-	$router->get('/','CompanyController@listCompanies');
-	$router->post('/','CompanyController@createCompany');
-	$router->get('/{id}','CompanyController@getCompany');
-	$router->post('/{id}','CompanyController@editCompany');
-	$router->delete('/{id}','CompanyController@deleteCompany');
+	$router->get('','CompanyController@listCompanies');
+	$router->post('','CompanyController@createCompany');
+	$router->get('{id}','CompanyController@getCompany');
+    $router->put('{id}','CompanyController@editCompany');
+	$router->delete('{id}','CompanyController@deleteCompany');
+
+});
+
+Route::group(['prefix' => 'employee'], function ($router) {
+
+    $router->get('','EmployeeController@listEmployee');
+    $router->post('','EmployeeController@createEmployee');
+    $router->get('{id}','EmployeeController@getEmployee');
+    $router->put('{id}','EmployeeController@editEmployee');
+    $router->delete('{id}','EmployeeController@deleteEmployee');
 
 });
 

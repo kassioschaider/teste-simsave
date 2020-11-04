@@ -7,36 +7,44 @@ use App\Company;
 
 class CompanyController extends Controller
 {
-	
-    public function listCompanies(Request $request)
+
+    public function listCompanies()
     {
     	return Company::get();
     }
 
-    public function getCompany(Request $request)
+    public function getCompany(int $id)
     {
-    	return Company::findOrFail($request->id);
+        $company = Company::find($id);
+        if (is_null($company)) {
+            return response()->json('', 204);
+        }
+    	return response()->json($company);
     }
 
     public function createCompany(Request $request)
     {
-    	$company = new Company($request->all());
-    	$company->save();
-
-    	return $company;
+    	return response()->json(Company::create($request->all()), 201);
     }
 
     public function editCompany(Request $request)
     {
-    	$company = Company::findOrFail($request->id);
+        $company = Company::find($request->id);
+        if (is_null($company)) {
+            return response()->json(['error' => 'Recurso não encontrado'], 404);
+        }
     	$company->update($request->all());
 
     	return $company;
     }
 
-    public function deleteCompany(Request $request)
+    public function deleteCompany(int $id)
     {
-    	Company::findOrFail($request->id)->delete();
+        if (Company::destroy($id) === 0) {
+            return response()->json(['error' => 'Recurso não encontrado'], 404);
+        }
+
+        return response()->json('', 204);
     }
 
 }
