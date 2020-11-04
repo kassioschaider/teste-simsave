@@ -13,7 +13,7 @@ class Employee extends Model
         'name', 'role', 'email', 'phone_number', 'admission_date', 'company_id',
     ];
 
-    public function companie()
+    public function company()
     {
         return $this->belongsTo(Company::class);
     }

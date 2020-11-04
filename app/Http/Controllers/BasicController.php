@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-abstract class BasicController
+abstract class BasicController extends Controller
 {
-
     protected $class;
 
-    public function list()
+    public function list(Request $request)
     {
-    	return $this->class::get();
+    	return $this->class::paginate($request->per_page);
     }
 
     public function get(int $id)
