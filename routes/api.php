@@ -19,7 +19,9 @@ Route::group(['prefix' => 'company'], function ($router) {
 	$router->post('','CompanyController@create');
 	$router->get('{id}','CompanyController@get');
     $router->put('{id}','CompanyController@edit');
-	$router->delete('{id}','CompanyController@delete');
+    $router->delete('{id}','CompanyController@delete');
+
+    $router->get('{companyId}/employees', 'EmployeeController@listByCompany');
 
 });
 
