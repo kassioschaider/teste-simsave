@@ -3,16 +3,23 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ExampleTest extends TestCase
+class CompanyControllerTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+    }
+
     /**
-     * A basic test example.
+     * A basic feature test example.
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testExample()
     {
         $response = $this->get('/');
 

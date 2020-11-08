@@ -31,7 +31,7 @@ abstract class BasicController extends Controller
     {
         $resource = $this->class::find($request->id);
         if (is_null($resource)) {
-            return response()->json(['error' => 'Recurso não encontrado'], 404);
+            return response()->json(['error' => 'Recurso inexistênte'], 404);
         }
     	$resource->update($request->all());
 
