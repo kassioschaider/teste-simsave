@@ -39,7 +39,7 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 8,
+            'company_id' => 9,
         ]);
 
         $response
@@ -50,7 +50,7 @@ class EmployeeControllerTest extends TestCase
                 'email' => "employee@simsave.com.br",
                 'phone_number' => "3723-9909",
                 'admission_date' => "2018-05-31",
-                'company_id' => 8,
+                'company_id' => 9,
                 'id' => 1,
             ]);
     }
@@ -65,7 +65,7 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 9,
+            'company_id' => 10,
         ]);
 
         $response = $this->withHeaders([
@@ -76,7 +76,7 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 9,
+            'company_id' => 10,
         ]);
 
         $response
@@ -87,7 +87,7 @@ class EmployeeControllerTest extends TestCase
                 'email' => "employee@simsave.com.br",
                 'phone_number' => "3723-9909",
                 'admission_date' => "2018-05-31",
-                'company_id' => 9,
+                'company_id' => 10,
                 'id' => 2,
             ]);
     }
@@ -102,7 +102,7 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 10,
+            'company_id' => 11,
         ]);
 
         $response = $this->get('/api/employee/3');
@@ -114,7 +114,7 @@ class EmployeeControllerTest extends TestCase
                 'email' => "employee@simsave.com.br",
                 'phone_number' => "3723-9909",
                 'admission_date' => "2018-05-31",
-                'company_id' => 10,
+                'company_id' => 11,
                 'id' => 3,
             ]);
     }
@@ -129,10 +129,22 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 11,
+            'company_id' => 12,
         ]);
 
         $response = $this->delete('/api/employee/4');
         $response->assertStatus(204);
+    }
+
+    public function testNoContentOrResource()
+    {
+        $this->get('/api/employee/999999999')
+            ->assertStatus(204);
+
+        $this->put('/api/employee/999999999')
+            ->assertStatus(404);
+
+        $this->delete('/api/employee/999999999')
+            ->assertStatus(404);
     }
 }

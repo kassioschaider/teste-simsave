@@ -86,4 +86,16 @@ class CompanyControllerTest extends TestCase
         $response = $this->delete('/api/company/6');
         $response->assertStatus(204);
     }
+
+    public function testNoContentOrResource()
+    {
+        $this->get('/api/company/999999999')
+            ->assertStatus(204);
+
+        $this->put('/api/company/999999999')
+            ->assertStatus(404);
+
+        $this->delete('/api/company/999999999')
+            ->assertStatus(404);
+    }
 }
