@@ -93,11 +93,33 @@ class CompanyControllerTest extends TestCase
             ]);
     }
 
+    public function testDeleteRestrito()
+    {
+        $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('POST', '/api/employee', [
+            'name' => "Funcinário 1",
+            'role' => "Estagiário",
+            'email' => "employee@simsave.com.br",
+            'phone_number' => "3723-9909",
+            'admission_date' => "2018-05-31",
+            'company_id' => 6,
+        ]);
+
+        $response = $this->delete('/api/company/6');
+        $response
+            ->assertStatus(404)
+            ->assertJson([
+                'error' => "Não é possível excluir essa empresa, pois ela tem funcionário(s)"
+            ]);
+
+    }
+
     public function testDelete()
     {
-        $response = $this->delete('/api/company/6');
+        $response = $this->delete('/api/company/7');
         $response->assertStatus(204);
-        $this->get('/api/company/6')->assertStatus(204);
+        $this->get('/api/company/7')->assertStatus(204);
     }
 
     public function testNoContentOrResource()
@@ -128,7 +150,7 @@ class CompanyControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 8,
+            'company_id' => 9,
         ]);
 
         $this->withHeaders([
@@ -139,10 +161,10 @@ class CompanyControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 8,
+            'company_id' => 9,
         ]);
 
-        $response = $this->get('/api/company/8/employees');
+        $response = $this->get('/api/company/9/employees');
 
         $response
             ->assertStatus(200)
@@ -150,40 +172,40 @@ class CompanyControllerTest extends TestCase
                 'current_page' => 1,
                 'data' => [
                     0 => [
-                        'id' => 1,
+                        'id' => 2,
                         'name' => "Funcinário 1",
                         'role' => "Estagiário",
                         'email' => "employee@simsave.com.br",
                         'phone_number' => "3723-9909",
                         'admission_date' => "2018-05-31",
-                        'company_id' => 8,
+                        'company_id' => 9,
                         'deleted_at' => null,
                         'links' => [
-                            'self' => "/api/employee/1",
-                            'company' => "/api/company/8",
+                            'self' => "/api/employee/2",
+                            'company' => "/api/company/9",
                         ],
                     ],
                     1 => [
-                        'id' => 2,
+                        'id' => 3,
                         'name' => "Funcinário 2",
                         'role' => "Estagiário",
                         'email' => "employee@simsave.com.br",
                         'phone_number' => "3723-9909",
                         'admission_date' => "2018-05-31",
-                        'company_id' => 8,
+                        'company_id' => 9,
                         'deleted_at' => null,
                         'links' => [
-                            'self' => "/api/employee/2",
-                            'company' => "/api/company/8",
+                            'self' => "/api/employee/3",
+                            'company' => "/api/company/9",
                         ],
                     ],
                 ],
-                'first_page_url' => "http://localhost/api/company/8/employees?page=1",
+                'first_page_url' => "http://localhost/api/company/9/employees?page=1",
                 'from' => 1,
                 'last_page' => 1,
-                'last_page_url' => "http://localhost/api/company/8/employees?page=1",
+                'last_page_url' => "http://localhost/api/company/9/employees?page=1",
                 'next_page_url' => null,
-                'path' => "http://localhost/api/company/8/employees",
+                'path' => "http://localhost/api/company/9/employees",
                 'per_page' => 15,
                 'prev_page_url' => null,
                 'to' => 2,
