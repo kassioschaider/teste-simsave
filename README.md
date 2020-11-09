@@ -1,8 +1,27 @@
-## LINK para Documentação no SwaggerHub:
-    https://app.swaggerhub.com/apis/kassioschaider7/SimSave/1.0.0
+# LINK para Documentação no SwaggerHub:
+    https://app.swaggerhub.com/apis-docs/kassioschaider7/SimSave/1.0.0/#/
 
 Obs: não está exatamente igual ao software pois eu não queria estourar o tempo para fazer a documentação, mas é possível visualizar os métodos de forma geral.
 Eu tomei a liberdade de fazer algumas alterações nas rotas e no Controller, posso explicar tudo por reunião.
+
+# Alterações para facilitar instalação
+Algumas adições que fiz ao projeto base :)
+
+## Docker
+Caso queiram, podem utilizar os contêiners que coloquei no projeto. Utilizei eles pois eu tenho o PHP 7.4 instalado na máquina e o teste era no 7.1.3.
+Alguns comandos do artisan também só funcionam no contêiner, por isso criei um arquivo "bin" no projeto para auxiliar, mais abaixo eu explico sobre ele.
+
+## Tests
+Escrevi testes para os end-points, porém eles possuem um env.testing próprio e um contêiner.
+
+## Arquivo Bin
+Esse arquivo foi criado para facilitar o acesso aos comandos no contêiner "app", seguem eles abaixo:
+    ./bin up -d (subir contêiners do docker)
+    ./bin artisan migrate (rodar migrations)
+    ./bin artisan db:seed (rodar seeds)
+    ./bin phpunit (rodar testes)
+    
+    
 
 
 # Teste Back-End SimSave
