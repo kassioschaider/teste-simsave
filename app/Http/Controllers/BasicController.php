@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 abstract class BasicController extends Controller
@@ -24,7 +25,12 @@ abstract class BasicController extends Controller
 
     public function create(Request $request)
     {
-    	return response()->json($this->class::create($request->all()), 201);
+        try {
+            $resource = $this->class::create($request->all());
+        } catch (QueryException $e) {
+            return response()->json(['error' => 'JSON inválido'], 500);
+        }
+    	return response()->json($resource, 201);
     }
 
     public function edit(Request $request)
