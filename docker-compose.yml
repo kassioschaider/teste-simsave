@@ -7,7 +7,7 @@ services:
     volumes:
       - .:/var/www/app
     ports:
-      - "80:8080"
+      - "8000:8080"
     links:
       - mysql
     environment:
@@ -16,6 +16,7 @@ services:
 
   mysql:
     image: mysql:5.7
+    container_name: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_DATABASE=teste_simsave
@@ -23,3 +24,14 @@ services:
       - MYSQL_PASSWORD=admin
     ports:
       - "3306:3306"
+
+  mysql-testing:
+    image: mysql:5.7
+    container_name: mysql-testing
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=teste_simsave_testing
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    ports:
+      - "3307:3306"
