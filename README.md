@@ -1,3 +1,9 @@
+## LINK para Documentação no SwaggerHub:
+    https://app.swaggerhub.com/apis/kassioschaider7/SimSave/1.0.0
+
+Obs: não está exatamente igual ao software pois eu não queria estourar o tempo para fazer a documentação, mas é possível visualizar os métodos de forma geral.
+Eu tomei a liberdade de fazer algumas alterações nas rotas e no Controller, posso explicar tudo por reunião.
+
 
 # Teste Back-End SimSave
 Teste para candidatura para vaga de desenvolvedor back-end da SimSave
