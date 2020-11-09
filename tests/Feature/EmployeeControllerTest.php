@@ -39,7 +39,7 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 9,
+            'company_id' => 10,
         ]);
 
         $response
@@ -50,8 +50,12 @@ class EmployeeControllerTest extends TestCase
                 'email' => "employee@simsave.com.br",
                 'phone_number' => "3723-9909",
                 'admission_date' => "2018-05-31",
-                'company_id' => 9,
-                'id' => 1,
+                'company_id' => 10,
+                'id' => 3,
+                'links' => [
+                    'self' => "/api/employee/3",
+                    'company' => "/api/company/10",
+                ],
             ]);
     }
 
@@ -65,18 +69,18 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 10,
+            'company_id' => 11,
         ]);
 
         $response = $this->withHeaders([
             'X-Header' => 'Value',
-        ])->json('PUT', '/api/employee/2', [
+        ])->json('PUT', '/api/employee/4', [
             'name' => "Funcinário Editado",
             'role' => "Estagiário",
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 10,
+            'company_id' => 11,
         ]);
 
         $response
@@ -87,8 +91,8 @@ class EmployeeControllerTest extends TestCase
                 'email' => "employee@simsave.com.br",
                 'phone_number' => "3723-9909",
                 'admission_date' => "2018-05-31",
-                'company_id' => 10,
-                'id' => 2,
+                'company_id' => 11,
+                'id' => 4,
             ]);
     }
 
@@ -102,10 +106,10 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 11,
+            'company_id' => 12,
         ]);
 
-        $response = $this->get('/api/employee/3');
+        $response = $this->get('/api/employee/5');
         $response
             ->assertStatus(200)
             ->assertJson([
@@ -114,8 +118,8 @@ class EmployeeControllerTest extends TestCase
                 'email' => "employee@simsave.com.br",
                 'phone_number' => "3723-9909",
                 'admission_date' => "2018-05-31",
-                'company_id' => 11,
-                'id' => 3,
+                'company_id' => 12,
+                'id' => 5,
             ]);
     }
 
@@ -129,11 +133,12 @@ class EmployeeControllerTest extends TestCase
             'email' => "employee@simsave.com.br",
             'phone_number' => "3723-9909",
             'admission_date' => "2018-05-31",
-            'company_id' => 12,
+            'company_id' => 13,
         ]);
 
-        $response = $this->delete('/api/employee/4');
+        $response = $this->delete('/api/employee/6');
         $response->assertStatus(204);
+        $this->get('/api/employee/6')->assertStatus(204);
     }
 
     public function testNoContentOrResource()
@@ -142,9 +147,15 @@ class EmployeeControllerTest extends TestCase
             ->assertStatus(204);
 
         $this->put('/api/employee/999999999')
-            ->assertStatus(404);
+            ->assertStatus(404)
+            ->assertJson([
+                'error' => "Recurso inexistente"
+            ]);
 
         $this->delete('/api/employee/999999999')
-            ->assertStatus(404);
+            ->assertStatus(404)
+            ->assertJson([
+                'error' => "Recurso inexistente"
+            ]);
     }
 }
